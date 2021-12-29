@@ -7,6 +7,8 @@ set(APP_NAME          "compass")
 set(APP_ID            "io.github.janbar.compass")
 set(EXEC              "compass")
 set(ICON_FILE         "compass.png")
+set(MANIFEST_FILE     "manifest.json")
+set(APPARMOR_FILE     "compass.apparmor")
 set(DESKTOP_FILE_NAME "compass.desktop")
 set(APPDATA_FILE_NAME "compass.appdata.xml")
 
@@ -25,7 +27,7 @@ set(PLUGINS_DIR ${CMAKE_INSTALL_FULL_LIBDIR}/${APP_NAME})
 set(COMPASS_GUI "${PLUGINS_DIR}/compass-gui")
 
 install(
-  PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/${EXEC}"
+  PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/gui/compass-gui"
   DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
@@ -36,12 +38,22 @@ configure_file(
 
 install(
   FILES ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE_NAME}
-  DESTINATION ${DESKTOP_DIR} RENAME ${APP_ID}.desktop
+  DESTINATION ${CMAKE_INSTALL_PREFIX}
+)
+
+configure_file(${MANIFEST_FILE}.in ${CMAKE_CURRENT_BINARY_DIR}/${MANIFEST_FILE})
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/${MANIFEST_FILE}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}
+)
+install(
+  FILES ${APPARMOR_FILE}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}
 )
 
 install(
   FILES "${ICON_FILE}"
-  DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/256x256/apps RENAME ${APP_NAME}.png
+  DESTINATION ${CMAKE_INSTALL_PREFIX}
 )
 
 configure_file(

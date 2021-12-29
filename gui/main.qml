@@ -217,6 +217,7 @@ ApplicationWindow {
     }
 
     header: Rectangle {
+        id: header
         Material.foreground: mainStyle.view.foregroundColor
         Material.background: mainStyle.view.backgroundColor
         color: mainStyle.view.backgroundColor
@@ -248,7 +249,7 @@ ApplicationWindow {
             fill: undefined
             left: parent.left
             right: parent.right
-            top: parent.top
+            top: header.bottom
         }
         initialItem: "qrc:/SensorPage.qml"
     }
