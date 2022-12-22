@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=@APP_NAME@
-Exec=bin/compass-gui
-Icon=@APP_NAME@
+Exec=@EXEC@
+Icon=@ICON_FILE@
 Terminal=false
 Type=Application
 X-Ubuntu-Touch=true
